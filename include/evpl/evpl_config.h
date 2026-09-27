@@ -294,6 +294,10 @@ EVPL_API void evpl_global_config_set_rdmacm_sq_size(
     struct evpl_global_config *config,
     unsigned int               size);
 
+EVPL_API void evpl_global_config_set_rdmacm_flush_batch(
+    struct evpl_global_config *config,
+    unsigned int               batch);
+
 EVPL_API void evpl_global_config_set_rdmacm_srq_size(
     struct evpl_global_config *config,
     unsigned int               size);
@@ -375,6 +379,13 @@ EVPL_API void evpl_global_config_set_libaio_enabled(
     int                        enabled);
 
 EVPL_API void evpl_global_config_set_spdk_enabled(
+    struct evpl_global_config *config,
+    int                        enabled);
+
+/* When set (default), libevpl initializes and owns the SPDK env, thread
+ * library scheduler, and a reactor thread per worker under EVPL_CORE_MECH_SPDK.
+ * When cleared, the host application must bootstrap the SPDK env itself. */
+EVPL_API void evpl_global_config_set_spdk_managed(
     struct evpl_global_config *config,
     int                        enabled);
 
